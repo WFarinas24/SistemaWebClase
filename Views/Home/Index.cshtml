@@ -1,0 +1,86 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+<div class="sheetSlider sh--default">
+    <input id="s1" type="radio" name="slide1" checked />
+    <input id="s2" type="radio" name="slide1" />
+    <input id="s3" type="radio" name="slide1" />
+    <input id="s4" type="radio" name="slide1" />
+    <input id="s5" type="radio" name="slide1" />
+    <input id="s6" type="radio" name="slide1" />
+    <input id="s7" type="radio" name="slide1" />
+    <input id="s8" type="radio" name="slide1" />
+    <input id="s9" type="radio" name="slide1" />
+    <input id="s10" type="radio" name="slide1" />
+    <div class="sh__content">
+
+        @* Los item del Slider *@
+        <div class="sh__item">
+            <img src="~/Images/UWP.png" alt="imgText" class="imgSlider" />
+            <!--Información de los item-->
+            <div class="sh__meta">
+                <h4>UWP</h4>
+                <span>
+                    Curso de app para Windows
+                    <a href="#urlPagina">Link</a>
+                </span>
+            </div>
+        </div>
+
+        @* Los item del Slider *@
+        <div class="sh__item">
+            <img src="~/Images/Xamarin.png" alt="imgText" class="imgSlider" />
+            <!--Información de los item-->
+            <div class="sh__meta">
+                <h4>Xamarin</h4>
+                <span>
+                    Curso de Xamarin para Android y Firebase C#
+                    <a href="#urlPagina">Link</a>
+                </span>
+            </div>
+        </div>
+        @* Los item del Slider *@
+        <div class="sh__item">
+            <img src="~/Images/Systema-portada-core.png" alt="imgText" class="imgSlider" />
+            <!--Información de los item-->
+            <div class="sh__meta">
+                <h4>ASP.NET CORE MVC</h4>
+                <span>
+                    Curso de App Web en ASP.NET CORE
+                    <a href="#urlPagina">Link</a>
+                </span>
+            </div>
+        </div>
+
+
+
+        @* Los item del Slider *@
+        <div class="sh__item">
+            <img src="~/Images/Systema5.png" alt="imgText" class="imgSlider" />
+            <!--Información de los item-->
+            <div class="sh__meta">
+                <h4>Java Web MVC</h4>
+                <span>
+                    Curso de JAVA Web en MVC
+                    <a href="#urlPagina">Link</a>
+                </span>
+            </div>
+        </div>
+
+    </div>
+    <!--Botones-->
+    <div class="sh__btns">
+        <label for="s1"></label>
+        <label for="s2"></label>
+        <label for="s3"></label>
+        <label for="s4"></label>
+    </div>
+    <!--Flechas-->
+    <div class="sh__arrows">
+        <label for="s1"></label>
+        <label for="s2"></label>
+        <label for="s3"></label>
+        <label for="s4"></label>
+    </div>
+
+</div>

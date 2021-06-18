@@ -1,0 +1,70 @@
+﻿
+@model DataPaginacion<TbCategoria>
+
+
+<div class="modal fade" data-backdrop="static" id="modal1" tabindex="-1"
+     role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">Agregar categoria</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form method="post" asp-area="Categoria" asp-controller="Categoria" asp-action="PostCategoria">
+                <div class="modal-body">
+                    <div class="form-horizontal">
+
+                        <div class="form-group">
+                            <label asp-for="Input.Nombre" class="col-md-2 control-label"></label>
+                            <div class="col-md-10">
+                                <input asp-for="Input.Nombre" placeholder="Nombre" class="form-control" id="CategoriaNombre" />
+                                <span asp-validation-for="Input.Nombre" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="Input.Descripcion" class="col-md-2 control-label"></label>
+                            <div class="col-md-10">
+                                <input asp-for="Input.Descripcion" placeholder="Descripcion" class="form-control" id="CategoriaDescripcion" />
+                                <span asp-validation-for="Input.Descripcion" class="text-danger"></span>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label asp-for="Input.Estado" class="col-md-2 control-label"></label>
+                            <div class="col-md-10">
+                                <input asp-for="Input.Estado" placeholder="Nombre" class="form-control" id="CategoriaEstado" />
+                            </div>
+                        </div>
+
+                        <span id="mensaje" class="text-danger">
+                        </span>
+                        <input type="text" required hidden />
+                        <input asp-for="Input.CategoriaID" hidden id="CategoriaId" />
+
+
+
+                        <div class="modal-footer">
+                            <button class="btn btn-danger" data-dismiss="modal"> Cancelar</button>
+                            <button type="submit" onclick="catego.registrar_categoria()" class="btn btn-primary"> Guardar </button>
+                        </div>
+
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts{
+
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+
+}
+

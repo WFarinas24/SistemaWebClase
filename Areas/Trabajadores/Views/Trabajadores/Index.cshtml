@@ -1,0 +1,157 @@
+﻿@model DataPaginacion<tbTrabajador>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Index de Trabajadores</h1>
+<p>
+    <a data-toggle='modal' data-target='#modal1' class='btn btn-info text-white'>Agregar Trabajador</a>
+</p>
+
+<table class="table table-bordered">
+    <thead>
+
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Input.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Input.Apellidos)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Input.Cedula)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Input.Email)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Input.Estado)
+            </th>
+        </tr>
+
+    </thead>
+    <tbody>
+        @foreach (var item in Model.List)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Apellidos)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cedula)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+
+            <td>
+
+                @if (item.Estado)
+                {
+
+
+                    <a class="btn-sm btn-success text-light">Activa</a>
+                }
+                else
+                {
+                    <a class="btn-sm btn-success text-light">Inactivo</a>
+
+                }
+            </td>
+
+
+        </tr>
+        }
+    </tbody>
+</table>
+
+<div>
+    Resultados @Html.Raw(Model.Pagi_info)
+    <br />
+    @Html.Raw(Model.Pagi_Navegacion)
+</div>
+
+
+
+
+<div class="modal fade" data-backdrop="static" id="modal1" tabindex="-1"
+     role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">Nuevo Trabajador</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form method="post" asp-area="Trabajadores" asp-controller="Trabajadores" asp-action="PostTrabajadores">
+                <div class="modal-body">
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            <label asp-for="Input.Nombre" class="col-md-2 control-label"></label>
+                            <div class="col-md-10">
+                                <input asp-for="Input.Nombre" placeholder="Nombre" class="form-control" />
+                                <span asp-validation-for="Input.Nombre" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="Input.Apellidos" class="col-md-2 control-label"></label>
+                            <div class="col-md-10">
+                                <input asp-for="Input.Apellidos" placeholder="Apellidos" class="form-control" />
+                                <span asp-validation-for="Input.Apellidos" class="text-danger"></span>
+                            </div>
+
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Input.Telefono" class="col-md-2 control-label"></label>
+                            <div class="col-md-10">
+                                <input asp-for="Input.Telefono" placeholder="Telefono" class="form-control" />
+                                <span asp-validation-for="Input.Telefono" class="text-danger"></span>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label asp-for="Input.Email" class="col-md-2 control-label"></label>
+                            <div class="col-md-10">
+                                <input asp-for="Input.Email" placeholder="Correo@algo.com" class="form-control" />
+                                <span asp-validation-for="Input.Email" class="text-danger"></span>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label asp-for="Input.Estado" class="col-md-2 control-label"></label>
+                            <div class="col-md-10">
+                                <input asp-for="Input.Estado" class="form-control" />
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-danger" data-dismiss="modal"> Cancelar</button>
+                        <button type="submit" onclick="trabajadores.registrar_Trabajadores()" class="btn btn-primary"> Guardar </button>
+                    </div>
+
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+
+}

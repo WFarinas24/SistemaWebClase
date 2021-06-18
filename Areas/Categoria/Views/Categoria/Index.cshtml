@@ -1,0 +1,211 @@
+﻿@model DataPaginacion<TbCategoria>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Index desde Categorias</h1>
+<p>
+    <a data-toggle='modal' data-target='#modal1' class='btn btn-info text-white'>Crear categoria</a>
+</p>
+
+<form asp-area="Categoria" asp-controller="categoria" asp-action="index" method="get">
+    <div class="row">
+
+        <div class="col-xl-8 col-md-3">
+
+            <input id="filtrar" name="Search" placeholder="Buscar Categoria" class="form-control" />
+        </div>
+
+        <div class="col-xl-8 col-md-3">
+
+            <div class="col-md-2">
+
+                <button type="submit" class="btn btn-info text-white">
+                    Buscar
+                </button>
+            </div>
+        </div>
+
+
+    </div>
+
+</form>
+
+<br />
+
+<div class="form-group">
+    <div class="row">
+        <div class="col-md-3">
+            <a data-toggle="modal" data-target="#modal1" class="btn btn-info text-white"> Crear Categoria </a>
+        </div>
+
+        <form asp-area="Categoria" asp-controller="Categoria">
+            <div class="row">
+                <div class="col-md-5">
+                    <input type="number" name="Registros" class="form-control" value="5" min="0" max="50" step="1" />
+                </div>
+
+                <div class="col-md-3">
+                    <input type="submit" class="btn btn-success" value="N Registros" />
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+<table class="table table-borderless table-striped table-dark">
+    <thead>
+
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Input.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Input.Descripcion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Input.Estado)
+            </th>
+        </tr>
+
+    </thead>
+    <tbody>
+        @foreach (var item in Model.List)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Descripcion)
+
+                </td>
+
+                <td>
+
+                    <form asp-area="Categoria" asp-controller="Categoria" asp-action="UpdateEstado" method="post">
+
+
+
+                        <input type="hidden" name="id" value="@item.CategoriaID" />
+
+                        @if (item.Estado)
+                        {
+
+
+                            <input type="submit" class="btn-sm btn-success text-light" value="Activa" />
+                        }
+                        else
+                        {
+                            <input type="submit" class="btn-sm btn-warning text-light" value="Inactiva" />
+
+
+                        }
+                    </form>
+
+                </td>
+
+                <td>
+                    @{
+                        var data = JsonConvert.SerializeObject(item);
+                        <a data-toggle="modal" onclick="catego.EditarCategoria(@data)" data-target="#modal1" class="btn btn-info text-white">
+                            Editar
+
+                        </a>
+
+                        <a data-toggle="modal" onclick="catego.ObtenerCategoria(@data)" data-target="#modal1" class="btn btn-danger text-white">Eliminar</a>
+
+
+
+                    }
+                </td>
+
+
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div class="container">
+    Resultados @Html.Raw(Model.Pagi_info)
+    <br />
+    @Html.Raw(Model.Pagi_Navegacion)
+</div>
+
+<br />
+<br />
+
+
+
+<div class="modal fade" data-backdrop="static" id="modal1" tabindex="-1"
+     role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">Agregar categoria</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form method="post" asp-area="Categoria" asp-controller="Categoria" asp-action="PostCategoria">
+                <div class="modal-body">
+                    <div class="form-horizontal">
+
+                        <div class="form-group">
+                            <label asp-for="Input.Nombre" class="col-md-2 control-label"></label>
+                            <div class="col-md-10">
+                                <input asp-for="Input.Nombre" placeholder="Nombre" class="form-control" id="CategoriaNombre" />
+                                <span asp-validation-for="Input.Nombre" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="Input.Descripcion" class="col-md-2 control-label"></label>
+                            <div class="col-md-10">
+                                <input asp-for="Input.Descripcion" placeholder="Descripcion" class="form-control" id="CategoriaDescripcion" />
+                                <span asp-validation-for="Input.Descripcion" class="text-danger"></span>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label asp-for="Input.Estado" class="col-md-2 control-label"></label>
+                            <div class="col-md-10">
+                                <input asp-for="Input.Estado" placeholder="Nombre" class="form-control" id="CategoriaEstado" />
+                            </div>
+                        </div>
+
+                        <span id="mensaje" class="text-danger">
+                        </span>
+                        <input type="text" required hidden />
+                        <input asp-for="Input.CategoriaID" hidden id="CategoriaId" />
+
+
+
+                        <div class="modal-footer">
+                            <button class="btn btn-danger" data-dismiss="modal"> Cancelar</button>
+                            <button type="submit" onclick="catego.registrar_categoria()" class="btn btn-primary"> Guardar </button>
+                        </div>
+
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<partial name="_modalModificar" />
+<partial name="_modalEliminar" />
+
+
+
+@section Scripts{
+
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+
+}
