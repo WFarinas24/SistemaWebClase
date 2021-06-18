@@ -16,6 +16,37 @@ namespace SistemaWebClase.Library
             this.context = context; 
         }
 
+        internal IdentityError EliminarCategoria(int categoriaID)
+        {
+
+            IdentityError identityError;
+            try
+            {
+
+                var categoria = new TbCategoria()
+                {
+                    CategoriaID = categoriaID
+                };
+                context.Remove(categoria);
+
+                
+                context.SaveChanges();
+                identityError = new IdentityError
+                {
+                    Code = "Done"
+                };
+
+            }
+            catch (Exception e)
+            {
+                identityError = new IdentityError
+                {
+                    Code = "Error",
+                    Description = e.Message
+                };
+            }
+            return identityError;
+        }
 
         public List<TbCategoria> GetCategoria(String valor)
         {

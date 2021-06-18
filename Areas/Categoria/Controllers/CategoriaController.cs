@@ -102,19 +102,20 @@ namespace SistemaWebClase.Areas.Categoria.Controllers
 
         [HttpPost]
 
-        public string PostCategoria( DataPaginacion<TbCategoria> model)
+        public IActionResult PostCategoria( DataPaginacion<TbCategoria> model)
         {
             if (model.Input.Nombre != null && model.Input.Descripcion != null )
             {
 
 
                 var data = _Lcategoria.Registrar_Categoria(model.Input);
-                return "Guardado";
+                return Redirect("/Categoria/Index?area=Categoria");
 
             }
             else
             {
-                return "Llene todos los campos";
+                return View("Error");
+
             }
 
         }

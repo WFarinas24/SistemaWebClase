@@ -111,12 +111,13 @@
                 <td>
                     @{
                         var data = JsonConvert.SerializeObject(item);
+
                         <a data-toggle="modal" onclick="catego.EditarCategoria(@data)" data-target="#modal1" class="btn btn-info text-white">
                             Editar
 
                         </a>
 
-                        <a data-toggle="modal" onclick="catego.ObtenerCategoria(@data)" data-target="#modal1" class="btn btn-danger text-white">Eliminar</a>
+                        <a data-toggle="modal" onclick="catego.GetData(@data)" data-target="#ModalEliminar" class="btn btn-danger text-white">Eliminar</a>
 
 
 
@@ -201,8 +202,6 @@
 
 <partial name="_modalModificar" />
 <partial name="_modalEliminar" />
-
-
 
 @section Scripts{
 
